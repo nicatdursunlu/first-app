@@ -1,23 +1,30 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <h1>Hello, {{ name }}</h1>
-  <h2 v-text="job" v-bind:id="jobID"></h2>
-  <button v-bind:disabled="disabled">Click me</button>
-  <h3 class="underline">Underline text</h3>
-  <h3 class="underline" v-bind:class="status">Status</h3>
+  <h1>{{ title }}</h1>
+  <p>Welcome...</p>
+  <div v-if="showModal">
+    <Modal :header="header" :text="text" theme="sale" @click="toggleModal" />
+  </div>
+  <button @click.ctrl="toggleModal">Open Modal</button>
 </template>
 
 <script>
+import Modal from "./components/Modal";
+
 export default {
   name: "App",
+  components: { Modal },
   data() {
     return {
-      name: "Nijat Dursunlu",
-      job: "Front-End | Mobile Developer",
-      disabled: false,
-      jobID: "job-id",
-      status: "danger",
+      title: "My first Vue App!",
+      header: "Sign up for the Giveaway!",
+      text: "Grab your ninja swag for half price!",
+      showModal: false,
     };
+  },
+  methods: {
+    toggleModal() {
+      this.showModal = !this.showModal;
+    },
   },
 };
 </script>
@@ -35,5 +42,9 @@ export default {
 .underline {
   text-decoration: underline;
   color: blueviolet;
+}
+
+h1 {
+  color: violet;
 }
 </style>
